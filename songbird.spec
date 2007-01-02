@@ -48,7 +48,7 @@ Firefox, it is built from Mozilla, cross-platform and open source.
 
 %build
 cd trunk
-%{__make} -f songbird.mk
+%{__make} -f songbird.mk %{?debug:debug}
 
 %install
 rm -rf $RPM_BUILD_ROOT
