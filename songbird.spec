@@ -1,5 +1,5 @@
 %define		_snap 20070101
-%define		_rel 0.1
+%define		_rel 0.2
 Summary:	Songbird Web Player
 Name:		songbird
 Version:	0.2
@@ -27,6 +27,7 @@ BuildRequires:	perl-base
 BuildRequires:	unzip
 BuildRequires:	xulrunner-devel
 BuildRequires:	zip
+Requires:	xulrunner
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_appdir	%{_libdir}/%{name}
@@ -52,7 +53,11 @@ rm -rf $RPM_BUILD_ROOT
 cd trunk/compiled/dist
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_appdir}}
-install Songbird $RPM_BUILD_ROOT%{_bindir}/songbird
+cat <<'EOF' > $RPM_BUILD_ROOT%{_bindir}/songbird
+#!/bin/sh
+exec %{_bindir}/xulrunner %{_appdir}/application.ini
+EOF
+chmod a+x $RPM_BUILD_ROOT%{_bindir}/songbird
 cp -a application.ini $RPM_BUILD_ROOT%{_appdir}
 cp -a chrome components defaults plugins scripts $RPM_BUILD_ROOT%{_appdir}
 
