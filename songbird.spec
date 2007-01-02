@@ -15,7 +15,7 @@ NoSource:	1
 %endif
 %ifarch %{x8664}
 Source2:	http://developer.songbirdnest.com/nightly/dependency_snapshots/dependencies_snapshot-linux-x86_64-%{_snap}.tar.gz
-# Source2-md5:	7f4f938851f5fafeebc986d1bfdeda09
+# NoSource2-md5:	7f4f938851f5fafeebc986d1bfdeda09
 NoSource:	2
 %endif
 URL:		http://www.songbirdnest.com/
@@ -33,7 +33,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{_libdir}/%{name}
 
 %description
-Songbird Web Player.
+Songbird is a desktop Web player, a digital jukebox and Web browser
+mash-up. Like Winamp, it supports extensions and feathers. Like
+Firefox, it is built from Mozilla, cross-platform and open source.
 
 %prep
 %setup -q -n %{name}
