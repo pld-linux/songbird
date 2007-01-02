@@ -8,9 +8,16 @@ License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://developer.songbirdnest.com/nightly/snapshots/%{name}_snapshot_%{_snap}.tar.gz
 # Source0-md5:	3139f09a8f3719a2fc88d30b4e74d8a3
+%ifarch %{ix86}
 Source1:	http://developer.songbirdnest.com/nightly/dependency_snapshots/dependencies_snapshot-linux-i386-%{_snap}.tar.gz
 # NoSource1-md5:	63944bb0de1729ebe09d28f5a34a41f3
 NoSource:	1
+%endif
+%ifarch %{x8664}
+Source2:	http://developer.songbirdnest.com/nightly/dependency_snapshots/dependencies_snapshot-linux-x86_64-%{_snap}.tar.gz
+# Source2-md5:	7f4f938851f5fafeebc986d1bfdeda09
+NoSource:	2
+%endif
 URL:		http://www.songbirdnest.com/
 BuildRequires:	gstreamer-devel >= 0.10
 BuildRequires:	gtk+2-devel >= 1:2.0.0
@@ -29,7 +36,12 @@ Songbird Web Player.
 
 %prep
 %setup -q -n %{name}
+%ifarch %{ix86}
 %{__tar} -C trunk/dependencies -zxf %{SOURCE1}
+%endif
+%ifarch %{x8664}
+%{__tar} -C trunk/dependencies -zxf %{SOURCE2}
+%endif
 
 %build
 cd trunk
