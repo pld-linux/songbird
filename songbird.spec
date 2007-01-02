@@ -22,6 +22,8 @@ BuildRequires:	xulrunner-devel
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_appdir	%{_libdir}/%{name}
+
 %description
 Songbird Web Player.
 
@@ -35,14 +37,26 @@ cd trunk
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
+cd trunk/compiled/dist
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_appdir}}
+install Songbird $RPM_BUILD_ROOT%{_bindir}/songbird
+cp -a application.ini $RPM_BUILD_ROOT%{_appdir}
+cp -a chrome components defaults plugins scripts $RPM_BUILD_ROOT%{_appdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README*
+%attr(755,root,root) %{_bindir}/songbird
+%dir %{_appdir}
+%{_appdir}/application.ini
+%dir %{_appdir}/components
+%{_appdir}/components/*.js
+%{_appdir}/components/*.xpt
+%attr(755,root,root) %{_appdir}/components/*.so
+%dir %{_appdir}/plugins
+%{_appdir}/chrome
+%{_appdir}/defaults
+%{_appdir}/scripts
