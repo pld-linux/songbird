@@ -1,3 +1,5 @@
+# TODO
+# - try not to use dependencies_snapshot, use our system pkgs instead
 %define		_snap 20070101
 %define		_rel 0.2
 Summary:	Songbird Web Player
