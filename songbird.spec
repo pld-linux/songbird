@@ -3,6 +3,7 @@
 %define		_snap 20070101
 %define		_rel 0.2
 Summary:	Songbird Web Player
+Summary(pl):	Odtwarzacz WWW Songbird
 Name:		songbird
 Version:	0.2
 Release:	0.%{_snap}.%{_rel}
@@ -39,6 +40,12 @@ Songbird is a desktop Web player, a digital jukebox and Web browser
 mash-up. Like Winamp, it supports extensions and feathers. Like
 Firefox, it is built from Mozilla, cross-platform and open source.
 
+%description -l pl
+Songbird to skrzy¿owanie graficznego odtwarzacza WWW, cyfrowej szafy
+graj±cej i przegl±darki WWW. Podobnie jak Winamp obs³uguje
+rozszerzenia i skórki. Podobnie jak Firefox jest oparty na Mozilli,
+wieloplatformowy i ma otwarte ¼ród³a.
+
 %prep
 %setup -q -n %{name}
 %ifarch %{ix86}
@@ -49,8 +56,7 @@ Firefox, it is built from Mozilla, cross-platform and open source.
 %endif
 
 %build
-cd trunk
-%{__make} -f songbird.mk %{?debug:debug}
+%{__make} -C trunk -f songbird.mk %{?debug:debug}
 
 %install
 rm -rf $RPM_BUILD_ROOT
