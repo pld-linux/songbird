@@ -3,7 +3,7 @@
 %define		_snap 20070101
 %define		_rel 0.2
 Summary:	Songbird Web Player
-Summary(pl.UTF-8):   Odtwarzacz WWW Songbird
+Summary(pl.UTF-8):	Odtwarzacz WWW Songbird
 Name:		songbird
 Version:	0.2
 Release:	0.%{_snap}.%{_rel}
